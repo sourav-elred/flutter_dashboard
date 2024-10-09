@@ -1,5 +1,6 @@
 // Setup the router with a ShellRoute
 import 'package:flutter/material.dart';
+import 'package:flutter_dashboard/ui/dashboard_screen.dart';
 import 'package:flutter_dashboard/ui/landing_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -15,21 +16,14 @@ class AppRouter {
         routes: [
           GoRoute(
             path: '/dashboard',
-            builder: (context, state) => const Scaffold(
-              body: Center(
-                child: Text(
-                  'dashboard',
-                  style: TextStyle(color: Colors.black),
-                ),
-              ),
-            ),
+            builder: (context, state) => const DashboardScreen(),
           ),
           GoRoute(
             path: '/order-list',
             builder: (context, state) => const Scaffold(
               body: Center(
                   child: Text(
-                'settings',
+                'order list',
                 style: TextStyle(color: Colors.black),
               )),
             ),

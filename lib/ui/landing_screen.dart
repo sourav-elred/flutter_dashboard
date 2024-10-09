@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dashboard/ui/widgets/sidebar_button.dart';
+import 'package:flutter_dashboard/ui/widgets/topbar_icon.dart';
 import 'package:go_router/go_router.dart';
 
 class LandingScreen extends StatefulWidget {
@@ -61,7 +62,131 @@ class _LandingScreenState extends State<LandingScreen> {
               ),
             ),
           ),
-          Expanded(child: widget.child),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 56, vertical: 40),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      const Expanded(
+                        child: TextField(
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8)),
+                              borderSide: BorderSide(color: Color(0xFFEBEBEB)),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8)),
+                              borderSide: BorderSide(color: Color(0xFFEBEBEB)),
+                            ),
+                            fillColor: Colors.white,
+                            filled: true,
+                            hintText: 'Search here',
+                            hintStyle: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: Color(0xFF969BA0),
+                            ),
+                            suffixIconColor: Color(0xFFA4A4A4),
+                            suffixIcon: Padding(
+                              padding: EdgeInsets.only(right: 16),
+                              child: Icon(Icons.search),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 40),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            TopbarIcon(
+                              bgColor: Color(0x262D9CDB),
+                              icon: Icon(
+                                Icons.notifications_none_outlined,
+                                color: Color(0xff2D9CDB),
+                              ),
+                              count: 21,
+                              countColor: Color(0xff2D9CDB),
+                            ),
+                            SizedBox(width: 30),
+                            TopbarIcon(
+                              bgColor: Color(0x262D9CDB),
+                              icon: Icon(
+                                Icons.chat_bubble_outline_outlined,
+                                color: Color(0xff2D9CDB),
+                              ),
+                              count: 53,
+                              countColor: Color(0xff2D9CDB),
+                            ),
+                            SizedBox(width: 30),
+                            TopbarIcon(
+                              bgColor: Color(0x265E6C93),
+                              icon: Icon(
+                                Icons.card_giftcard_outlined,
+                                color: Color(0xff5E6C93),
+                              ),
+                              count: 15,
+                              countColor: Color(0xff5E6C93),
+                            ),
+                            SizedBox(width: 30),
+                            TopbarIcon(
+                              bgColor: Color(0x26FF5B5B),
+                              icon: Icon(
+                                Icons.settings_outlined,
+                                color: Color(0xffFF5B5B),
+                              ),
+                              count: 19,
+                              countColor: Color(0xffFF5B5B),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          RichText(
+                            text: const TextSpan(
+                              text: 'Hello, ',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 16,
+                                height: 19 / 16,
+                              ),
+                              children: [
+                                TextSpan(
+                                  text: 'Sourav',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 16,
+                                    height: 19 / 16,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(width: 18),
+                          const CircleAvatar(
+                            radius: 27,
+                            backgroundColor: Colors.white,
+                            child: CircleAvatar(
+                              radius: 24,
+                              backgroundImage: NetworkImage(
+                                  'https://avatar.iran.liara.run/public/12'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Expanded(child: widget.child),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
