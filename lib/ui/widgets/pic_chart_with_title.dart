@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 class PieChartWithTitle extends StatefulWidget {
   const PieChartWithTitle({
     super.key,
-    required this.value,
+    this.value,
     required this.title,
     required this.color,
     required this.remainingTileColor,
   });
 
-  final int value;
+  final int? value;
   final String title;
   final Color color;
   final Color remainingTileColor;
@@ -29,17 +29,20 @@ class _PieChartWithTitleState extends State<PieChartWithTitle> {
         children: [
           Stack(
             children: [
-              Positioned(
-                top: 30,
-                left: 60,
-                bottom: 0,
-                child: Text(
-                  '${widget.value}%',
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black,
-                    height: 28 / 20,
+              Visibility(
+                visible: widget.value != null,
+                child: Positioned(
+                  top: 30,
+                  left: 60,
+                  bottom: 0,
+                  child: Text(
+                    '${widget.value}%',
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                      height: 28 / 20,
+                    ),
                   ),
                 ),
               ),
@@ -94,14 +97,14 @@ class _PieChartWithTitleState extends State<PieChartWithTitle> {
       switch (i) {
         case 0:
           return PieChartSectionData(
-            value: widget.value.toDouble(),
+            value: widget.value?.toDouble(),
             radius: radius,
             showTitle: false,
             color: widget.color,
           );
         case 1:
           return PieChartSectionData(
-            value: 100 - widget.value.toDouble(),
+            value: widget.value != null ? 100 - widget.value!.toDouble() : null,
             radius: radius,
             showTitle: false,
             color: widget.remainingTileColor,

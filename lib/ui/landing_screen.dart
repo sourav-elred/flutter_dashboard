@@ -64,7 +64,7 @@ class _LandingScreenState extends State<LandingScreen> {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 56, vertical: 40),
+              padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 40),
               child: Column(
                 children: [
                   Row(

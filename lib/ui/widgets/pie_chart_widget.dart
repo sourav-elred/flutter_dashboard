@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dashboard/ui/widgets/pic_chart_with_title.dart';
 
-class PieChartWidget extends StatelessWidget {
+class PieChartWidget extends StatefulWidget {
   const PieChartWidget({super.key});
 
+  @override
+  State<PieChartWidget> createState() => _PieChartWidgetState();
+}
+
+class _PieChartWidgetState extends State<PieChartWidget> {
+  bool _showValue = true;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -57,8 +63,12 @@ class PieChartWidget extends StatelessWidget {
                       Flexible(
                         flex: 1,
                         child: CheckboxListTile(
-                          value: true,
-                          onChanged: (_) {},
+                          value: _showValue,
+                          onChanged: (value) {
+                            setState(() {
+                              _showValue = value!;
+                            });
+                          },
                           activeColor: const Color(0xFFFF5B5B),
                         ),
                       ),
@@ -85,25 +95,25 @@ class PieChartWidget extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 28),
-            const Row(
+            Row(
               children: [
                 PieChartWithTitle(
-                  value: 81,
+                  value: _showValue ? 81 : null,
                   title: 'Total Order',
-                  color: Color(0xFFFF5B5B),
-                  remainingTileColor: Color(0x26FF5B5B),
+                  color: const Color(0xFFFF5B5B),
+                  remainingTileColor: const Color(0x26FF5B5B),
                 ),
                 PieChartWithTitle(
-                  value: 22,
+                  value: _showValue ? 22 : null,
                   title: 'Customer Growth',
-                  color: Color(0xFF00B074),
-                  remainingTileColor: Color(0x2600B074),
+                  color: const Color(0xFF00B074),
+                  remainingTileColor: const Color(0x2600B074),
                 ),
                 PieChartWithTitle(
-                  value: 62,
+                  value: _showValue ? 62 : null,
                   title: 'Total Revenue',
-                  color: Color(0XFF2D9CDB),
-                  remainingTileColor: Color(0x262D9CDB),
+                  color: const Color(0XFF2D9CDB),
+                  remainingTileColor: const Color(0x262D9CDB),
                 ),
               ],
             ),
