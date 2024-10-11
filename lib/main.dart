@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Flutter Dashboard UI',
       theme: ThemeData(
         useMaterial3: true,
         scaffoldBackgroundColor: const Color(0XFFF3F2F7),
