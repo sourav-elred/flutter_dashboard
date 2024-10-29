@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class MonthlySalesChartWidget extends StatelessWidget {
   const MonthlySalesChartWidget({super.key});
@@ -71,7 +72,7 @@ class MonthlySalesChartWidget extends StatelessWidget {
                 LineChartData(
                   lineTouchData: lineTouchData1,
                   gridData: gridData,
-                  titlesData: titlesData1,
+                  titlesData: titlesData1(context),
                   borderData: borderData,
                   lineBarsData: lineBarsData1,
                   minX: 0,
@@ -95,9 +96,9 @@ class MonthlySalesChartWidget extends StatelessWidget {
         ),
       );
 
-  FlTitlesData get titlesData1 => FlTitlesData(
+  FlTitlesData titlesData1(BuildContext context) => FlTitlesData(
         bottomTitles: AxisTitles(
-          sideTitles: bottomTitles,
+          sideTitles: bottomTitles(context),
         ),
         rightTitles: const AxisTitles(
           sideTitles: SideTitles(showTitles: false),
@@ -370,8 +371,8 @@ class MonthlySalesChartWidget extends StatelessWidget {
     );
   }
 
-  SideTitles get bottomTitles => SideTitles(
-        showTitles: true,
+  SideTitles bottomTitles(BuildContext context) => SideTitles(
+        showTitles: ResponsiveBreakpoints.of(context).isDesktop ? true : false,
         reservedSize: 50,
         interval: 1,
         getTitlesWidget: bottomTitleWidgets,

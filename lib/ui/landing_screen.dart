@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dashboard/ui/widgets/sidebar_button.dart';
 import 'package:flutter_dashboard/ui/widgets/topbar_icon.dart';
 import 'package:go_router/go_router.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class LandingScreen extends StatefulWidget {
   const LandingScreen({super.key, required this.child});
@@ -27,48 +28,36 @@ class _LandingScreenState extends State<LandingScreen> {
     {'title': 'Chat', 'icon': Icons.chat_bubble_outline},
     {'title': 'Wallet', 'icon': Icons.wallet_outlined},
   ];
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
+    final isDesktop = ResponsiveBreakpoints.of(context).isDesktop;
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: !isDesktop ? _buildSidebar() : null,
       body: Row(
         children: [
-          Container(
-            width: 300,
-            color: Colors.white,
-            child: Padding(
-              padding: const EdgeInsets.all(40.0),
-              child: Column(
-                children: [
-                  Image.asset(
-                    'assets/images/splash_logo.png',
-                    color: Colors.red,
-                    height: 80,
-                  ),
-                  const SizedBox(height: 40),
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: sideMenuItems.length,
-                      itemBuilder: (context, index) {
-                        return SidebarButton(
-                          onTap: () => _sidebarNavigation(index, context),
-                          isSelected: index == _getSelectedIndex(context),
-                          icon: sideMenuItems[index]['icon'] as IconData,
-                          title: sideMenuItems[index]['title'] as String,
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
+          Visibility(
+            visible: isDesktop,
+            child: _buildSidebar(),
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 40),
+              padding: EdgeInsets.symmetric(
+                horizontal: isDesktop ? 36 : 10,
+                vertical: isDesktop ? 40 : 10,
+              ).copyWith(top: isDesktop ? 40 : 20),
               child: Column(
                 children: [
                   Row(
                     children: [
+                      if (!isDesktop)
+                        IconButton(
+                          icon: const Icon(Icons.menu),
+                          onPressed: () {
+                            _scaffoldKey.currentState?.openDrawer();
+                          },
+                        ),
                       const Expanded(
                         child: TextField(
                           decoration: InputDecoration(
@@ -98,12 +87,14 @@ class _LandingScreenState extends State<LandingScreen> {
                           ),
                         ),
                       ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 40),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isDesktop ? 40 : 10,
+                        ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            TopbarIcon(
+                            const TopbarIcon(
                               bgColor: Color(0x262D9CDB),
                               icon: Icon(
                                 Icons.notifications_none_outlined,
@@ -112,8 +103,8 @@ class _LandingScreenState extends State<LandingScreen> {
                               count: 21,
                               countColor: Color(0xff2D9CDB),
                             ),
-                            SizedBox(width: 30),
-                            TopbarIcon(
+                            SizedBox(width: isDesktop ? 30 : 5),
+                            const TopbarIcon(
                               bgColor: Color(0x262D9CDB),
                               icon: Icon(
                                 Icons.chat_bubble_outline_outlined,
@@ -122,8 +113,8 @@ class _LandingScreenState extends State<LandingScreen> {
                               count: 53,
                               countColor: Color(0xff2D9CDB),
                             ),
-                            SizedBox(width: 30),
-                            TopbarIcon(
+                            SizedBox(width: isDesktop ? 30 : 5),
+                            const TopbarIcon(
                               bgColor: Color(0x265E6C93),
                               icon: Icon(
                                 Icons.card_giftcard_outlined,
@@ -132,8 +123,8 @@ class _LandingScreenState extends State<LandingScreen> {
                               count: 15,
                               countColor: Color(0xff5E6C93),
                             ),
-                            SizedBox(width: 30),
-                            TopbarIcon(
+                            SizedBox(width: isDesktop ? 30 : 5),
+                            const TopbarIcon(
                               bgColor: Color(0x26FF5B5B),
                               icon: Icon(
                                 Icons.settings_outlined,
@@ -148,31 +139,34 @@ class _LandingScreenState extends State<LandingScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          RichText(
-                            text: const TextSpan(
-                              text: 'Hello, ',
-                              style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 16,
-                                height: 19 / 16,
-                              ),
-                              children: [
-                                TextSpan(
-                                  text: 'Sourav',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 16,
-                                    height: 19 / 16,
-                                  ),
+                          Visibility(
+                            visible: isDesktop,
+                            child: RichText(
+                              text: const TextSpan(
+                                text: 'Hello, ',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 16,
+                                  height: 19 / 16,
                                 ),
-                              ],
+                                children: [
+                                  TextSpan(
+                                    text: 'Sourav',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 16,
+                                      height: 19 / 16,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                          const SizedBox(width: 18),
-                          const CircleAvatar(
-                            radius: 27,
+                          if (isDesktop) const SizedBox(width: 18),
+                          CircleAvatar(
+                            radius: isDesktop ? 27 : 20,
                             backgroundColor: Colors.white,
-                            child: CircleAvatar(
+                            child: const CircleAvatar(
                               radius: 24,
                               backgroundImage: NetworkImage(
                                   'https://avatar.iran.liara.run/public/12'),
@@ -188,6 +182,39 @@ class _LandingScreenState extends State<LandingScreen> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildSidebar() {
+    return Container(
+      width: 300,
+      color: Colors.white,
+      child: Padding(
+        padding: const EdgeInsets.all(40.0),
+        child: Column(
+          children: [
+            Image.asset(
+              'assets/images/splash_logo.png',
+              color: Colors.red,
+              height: 80,
+            ),
+            const SizedBox(height: 40),
+            Expanded(
+              child: ListView.builder(
+                itemCount: sideMenuItems.length,
+                itemBuilder: (context, index) {
+                  return SidebarButton(
+                    onTap: () => _sidebarNavigation(index, context),
+                    isSelected: index == _getSelectedIndex(context),
+                    icon: sideMenuItems[index]['icon'] as IconData,
+                    title: sideMenuItems[index]['title'] as String,
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

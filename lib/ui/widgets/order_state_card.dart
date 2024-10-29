@@ -19,6 +19,8 @@ class OrderStateCard extends StatelessWidget {
         height: 150,
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CircleAvatar(
               radius: 38,

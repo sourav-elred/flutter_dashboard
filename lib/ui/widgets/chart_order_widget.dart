@@ -1,86 +1,116 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class ChartOrderWidget extends StatelessWidget {
   const ChartOrderWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final isTablet = ResponsiveBreakpoints.of(context).largerThan(MOBILE);
+    final isDesktop = ResponsiveBreakpoints.of(context).largerThan(TABLET);
+
+    final horizontalPadding = isDesktop ? 40.0 : (isTablet ? 30.0 : 20.0);
+    final verticalPadding = isDesktop ? 25.0 : (isTablet ? 20.0 : 15.0);
+    final titleFontSize = isDesktop ? 22.0 : (isTablet ? 20.0 : 18.0);
+    final subtitleFontSize = isDesktop ? 16.0 : (isTablet ? 14.0 : 12.0);
+    final buttonFontSize = isDesktop ? 20.0 : (isTablet ? 18.0 : 16.0);
+    final chartAspectRatio = isDesktop ? 4.0 : (isTablet ? 3.5 : 3.0);
+
     return Card(
       color: Colors.white,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                const Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Chart Order',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                          color: Color(0xFF464255),
-                          height: 20 / 18,
+        padding: EdgeInsets.symmetric(
+          horizontal: horizontalPadding,
+          vertical: verticalPadding,
+        ),
+        child: SizedBox(
+          height: 240,
+          child: Column(
+            children: [
+              ResponsiveRowColumn(
+                rowMainAxisAlignment: MainAxisAlignment.spaceBetween,
+                rowPadding: const EdgeInsets.only(bottom: 20),
+                columnPadding: const EdgeInsets.only(bottom: 20),
+                layout: ResponsiveRowColumnType.ROW,
+                children: [
+                  ResponsiveRowColumnItem(
+                    rowFlex: 1,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Chart Order',
+                          style: TextStyle(
+                            fontSize: titleFontSize,
+                            fontWeight: FontWeight.w700,
+                            color: const Color(0xFF464255),
+                            height: 20 / 18,
+                          ),
                         ),
-                      ),
-                      Text(
-                        'Lorem ipsum dolor sit amet, consectetur adip',
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                          color: Color(0xFFB9BBBD),
-                          height: 14 / 12,
+                        Text(
+                          'Lorem ipsum dolor sit amet, consectetur adip',
+                          style: TextStyle(
+                            fontSize: subtitleFontSize,
+                            fontWeight: FontWeight.w400,
+                            color: const Color(0xFFB9BBBD),
+                            height: 14 / 12,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(14),
-                    border: Border.all(
-                      color: const Color(0xFF2D9CDB),
+                      ],
                     ),
                   ),
-                  child: const Row(
-                    children: [
-                      Icon(
-                        Icons.download_outlined,
-                        color: Color(0xFF2D9CDB),
+                  ResponsiveRowColumnItem(
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: horizontalPadding * 0.8,
+                        vertical: verticalPadding * 0.4,
                       ),
-                      SizedBox(width: 6),
-                      Text(
-                        'Save Report',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                          color: Color(0xFF2D9CDB),
-                          height: 16 / 16,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(14),
+                        border: Border.all(
+                          color: const Color(0xFF2D9CDB),
                         ),
                       ),
-                    ],
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.download_outlined,
+                            color: const Color(0xFF2D9CDB),
+                            size: buttonFontSize * 1.5,
+                          ),
+                          SizedBox(width: isDesktop ? 6 : 0),
+                          Visibility(
+                            visible: isDesktop,
+                            child: Text(
+                              'Save Report',
+                              style: TextStyle(
+                                fontSize: buttonFontSize,
+                                fontWeight: FontWeight.w700,
+                                color: const Color(0xFF2D9CDB),
+                                height: 16 / 16,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
-            AspectRatio(
-              aspectRatio: 3,
-              child: LineChart(mainData()),
-            ),
-          ],
+                ],
+              ),
+              AspectRatio(
+                aspectRatio: chartAspectRatio,
+                child: LineChart(mainData(isDesktop)),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  LineChartData mainData() {
+  LineChartData mainData(bool isDesktop) {
     return LineChartData(
       borderData: FlBorderData(show: false),
       gridData: const FlGridData(show: false),
@@ -93,12 +123,14 @@ class ChartOrderWidget extends StatelessWidget {
           sideTitles: SideTitles(showTitles: false),
         ),
         bottomTitles: AxisTitles(
-          sideTitles: SideTitles(
-            showTitles: true,
-            reservedSize: 35,
-            interval: 1,
-            getTitlesWidget: bottomTitleWidgets,
-          ),
+          sideTitles: isDesktop
+              ? SideTitles(
+                  showTitles: true,
+                  reservedSize: 35,
+                  interval: 1,
+                  getTitlesWidget: bottomTitleWidgets,
+                )
+              : const SideTitles(showTitles: false),
         ),
         leftTitles: const AxisTitles(
           sideTitles: SideTitles(
