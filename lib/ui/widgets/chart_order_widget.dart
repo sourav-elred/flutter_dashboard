@@ -1,5 +1,8 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dashboard/ui/widgets/chart_order_bottom_title_widget.dart';
+import 'package:flutter_dashboard/ui/widgets/chart_order_heading_widget.dart';
+import 'package:flutter_dashboard/ui/widgets/save_report_icon_button.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class ChartOrderWidget extends StatelessWidget {
@@ -36,65 +39,17 @@ class ChartOrderWidget extends StatelessWidget {
                 children: [
                   ResponsiveRowColumnItem(
                     rowFlex: 1,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Chart Order',
-                          style: TextStyle(
-                            fontSize: titleFontSize,
-                            fontWeight: FontWeight.w700,
-                            color: const Color(0xFF464255),
-                            height: 20 / 18,
-                          ),
-                        ),
-                        Text(
-                          'Lorem ipsum dolor sit amet, consectetur adip',
-                          style: TextStyle(
-                            fontSize: subtitleFontSize,
-                            fontWeight: FontWeight.w400,
-                            color: const Color(0xFFB9BBBD),
-                            height: 14 / 12,
-                          ),
-                        ),
-                      ],
+                    child: ChartOrderHeadingWidget(
+                      titleFontSize: titleFontSize,
+                      subtitleFontSize: subtitleFontSize,
                     ),
                   ),
                   ResponsiveRowColumnItem(
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: horizontalPadding * 0.8,
-                        vertical: verticalPadding * 0.4,
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(14),
-                        border: Border.all(
-                          color: const Color(0xFF2D9CDB),
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(
-                            Icons.download_outlined,
-                            color: const Color(0xFF2D9CDB),
-                            size: buttonFontSize * 1.5,
-                          ),
-                          SizedBox(width: isDesktop ? 6 : 0),
-                          Visibility(
-                            visible: isDesktop,
-                            child: Text(
-                              'Save Report',
-                              style: TextStyle(
-                                fontSize: buttonFontSize,
-                                fontWeight: FontWeight.w700,
-                                color: const Color(0xFF2D9CDB),
-                                height: 16 / 16,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                    child: SaveReportIconButton(
+                      horizontalPadding: horizontalPadding,
+                      verticalPadding: verticalPadding,
+                      buttonFontSize: buttonFontSize,
+                      isDesktop: isDesktop,
                     ),
                   ),
                 ],
@@ -128,14 +83,15 @@ class ChartOrderWidget extends StatelessWidget {
                   showTitles: true,
                   reservedSize: 35,
                   interval: 1,
-                  getTitlesWidget: bottomTitleWidgets,
+                  getTitlesWidget: (value, meta) => ChartOrderBottomTitleWidget(
+                    value: value,
+                    meta: meta,
+                  ),
                 )
               : const SideTitles(showTitles: false),
         ),
         leftTitles: const AxisTitles(
-          sideTitles: SideTitles(
-            showTitles: false,
-          ),
+          sideTitles: SideTitles(showTitles: false),
         ),
       ),
       minX: 0,
@@ -154,9 +110,6 @@ class ChartOrderWidget extends StatelessWidget {
             FlSpot(11, 4),
           ],
           isCurved: true,
-          // gradient: LinearGradient(
-          //   colors: gradientColors,
-          // ),
           barWidth: 3,
           isStrokeCapRound: true,
           dotData: const FlDotData(
@@ -172,47 +125,6 @@ class ChartOrderWidget extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-
-  Widget bottomTitleWidgets(double value, TitleMeta meta) {
-    const style = TextStyle(
-      fontWeight: FontWeight.w400,
-      fontSize: 12,
-      color: Color(0xFF464255),
-      height: 18 / 12,
-    );
-    Widget text;
-    switch (value.toInt()) {
-      case 1:
-        text = const Text('Sunday', style: style);
-        break;
-      case 3:
-        text = const Text('Monday', style: style);
-        break;
-      case 5:
-        text = const Text('Tuesday', style: style);
-        break;
-      case 7:
-        text = const Text('Wednesday', style: style);
-        break;
-      case 9:
-        text = const Text('Thursday', style: style);
-        break;
-      case 11:
-        text = const Text('Friday', style: style);
-        break;
-      case 13:
-        text = const Text('Saturday', style: style);
-        break;
-      default:
-        text = const Text('', style: style);
-        break;
-    }
-
-    return SideTitleWidget(
-      axisSide: meta.axisSide,
-      child: text,
     );
   }
 }

@@ -2,6 +2,9 @@ import 'dart:math';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dashboard/ui/widgets/customer_map_chart_Title_widget.dart';
+import 'package:flutter_dashboard/ui/widgets/customer_map_chart_heading_widget.dart';
+import 'package:flutter_dashboard/ui/widgets/customer_map_chart_left_title_widget.dart';
 
 class CustomerMapChartWidget extends StatelessWidget {
   const CustomerMapChartWidget({super.key});
@@ -14,62 +17,11 @@ class CustomerMapChartWidget extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
         child: Column(
           children: [
-            Row(
-              children: [
-                const Text(
-                  'Customer Map',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w700,
-                    color: Color(0xFF464255),
-                    height: 20 / 18,
-                  ),
-                ),
-                const Spacer(),
-                Row(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(
-                          color: const Color(0xffB9BBBD),
-                        ),
-                      ),
-                      child: const Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                        child: Row(
-                          children: [
-                            Text(
-                              'Weekly',
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xFFB9BBBD),
-                                height: 24 / 15,
-                              ),
-                            ),
-                            SizedBox(width: 10),
-                            Icon(
-                              Icons.arrow_drop_down,
-                              color: Color(0xffFF5B5B),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 14),
-                    const Icon(Icons.more_vert, color: Color(0xffB9BBBD)),
-                  ],
-                ),
-              ],
-            ),
+            const CustomerMapChartHeadingWidget(),
             const SizedBox(height: 10),
             AspectRatio(
               aspectRatio: 1,
-              child: Expanded(
-                child: BarChart(randomData()),
-              ),
+              child: Expanded(child: BarChart(randomData())),
             ),
           ],
         ),
@@ -77,10 +29,7 @@ class CustomerMapChartWidget extends StatelessWidget {
     );
   }
 
-  BarChartGroupData makeGroupData(
-    int x,
-    double y,
-  ) {
+  BarChartGroupData makeGroupData(int x, double y) {
     return BarChartGroupData(
       x: x,
       barRods: [
@@ -94,57 +43,17 @@ class CustomerMapChartWidget extends StatelessWidget {
     );
   }
 
-  Widget getTitles(double value, TitleMeta meta) {
-    const style = TextStyle(
-      color: Color(0xFFA3A3A3),
-      fontWeight: FontWeight.bold,
-      fontSize: 14,
-    );
-    List<String> days = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
-
-    Widget text = Text(
-      days[value.toInt()],
-      style: style,
-    );
-
-    return SideTitleWidget(
-      axisSide: meta.axisSide,
-      child: text,
-    );
-  }
-
-  Widget getLeftTitles(double value, TitleMeta meta) {
-    const style = TextStyle(
-      color: Color(0xFFA3A3A3),
-      fontWeight: FontWeight.bold,
-      fontSize: 14,
-    );
-    // List<String> count = ['0', '20', '40', '60', '80'];
-
-    Widget text = const Text(
-      '0',
-      style: style,
-    );
-
-    return SideTitleWidget(
-      axisSide: meta.axisSide,
-      space: 16,
-      child: text,
-    );
-  }
-
   BarChartData randomData() {
     return BarChartData(
       maxY: 300.0,
-      barTouchData: BarTouchData(
-        enabled: false,
-      ),
+      barTouchData: BarTouchData(enabled: false),
       titlesData: FlTitlesData(
         show: true,
         bottomTitles: AxisTitles(
           sideTitles: SideTitles(
             showTitles: true,
-            getTitlesWidget: getTitles,
+            getTitlesWidget: (value, meta) =>
+                CustomerMapChartTitleWidget(value: value, meta: meta),
             reservedSize: 38,
           ),
         ),
@@ -152,24 +61,16 @@ class CustomerMapChartWidget extends StatelessWidget {
           axisNameSize: 5,
           sideTitles: SideTitles(
             showTitles: true,
-            getTitlesWidget: getLeftTitles,
+            getTitlesWidget: (value, meta) =>
+                CustomerMapChartLefttitleWidget(value: value, meta: meta),
             reservedSize: 30,
           ),
         ),
-        topTitles: const AxisTitles(
-          sideTitles: SideTitles(
-            showTitles: false,
-          ),
-        ),
-        rightTitles: const AxisTitles(
-          sideTitles: SideTitles(
-            showTitles: false,
-          ),
-        ),
+        topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+        rightTitles:
+            const AxisTitles(sideTitles: SideTitles(showTitles: false)),
       ),
-      borderData: FlBorderData(
-        show: false,
-      ),
+      borderData: FlBorderData(show: false),
       barGroups: List.generate(
         7,
         (i) => makeGroupData(

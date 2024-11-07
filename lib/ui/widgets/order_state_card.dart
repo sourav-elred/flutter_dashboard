@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 class OrderStateCard extends StatelessWidget {
-  const OrderStateCard(
-      {super.key,
-      required this.count,
-      required this.subTitle,
-      required this.icon});
+  const OrderStateCard({
+    super.key,
+    required this.count,
+    required this.subTitle,
+    required this.icon,
+  });
 
   final String count;
   final String subTitle;
