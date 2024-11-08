@@ -12,10 +12,11 @@ class DashboardHeaderWidget extends StatelessWidget {
           ? ResponsiveRowColumnType.ROW
           : ResponsiveRowColumnType.COLUMN,
       rowMainAxisAlignment: MainAxisAlignment.spaceBetween,
+      columnCrossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const ResponsiveRowColumnItem(
-          // rowFlex: 2,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
@@ -56,7 +57,6 @@ class DashboardHeaderWidget extends StatelessWidget {
           ),
         ),
         ResponsiveRowColumnItem(
-          // rowFlex: 2,
           child: Card(
             elevation: 2,
             shape: RoundedRectangleBorder(
@@ -66,7 +66,7 @@ class DashboardHeaderWidget extends StatelessWidget {
             child: const Padding(
               padding: EdgeInsets.all(16.0),
               child: Row(
-                mainAxisSize: MainAxisSize.min,
+                mainAxisSize: MainAxisSize.max,
                 children: [
                   TopbarIcon(
                     bgColor: Color(0x262D9CDB),

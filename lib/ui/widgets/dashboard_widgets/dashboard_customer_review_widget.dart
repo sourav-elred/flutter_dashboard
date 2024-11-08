@@ -3,18 +3,33 @@ import 'package:flutter_dashboard/ui/widgets/dashboard_widgets/dashboard_Custome
 import 'package:flutter_dashboard/ui/widgets/dashboard_widgets/dashboard_customer_toggle_button.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
-class DashboardCustomerReviewWidget extends StatelessWidget {
+class DashboardCustomerReviewWidget extends StatefulWidget {
   const DashboardCustomerReviewWidget({super.key});
 
   @override
+  State<DashboardCustomerReviewWidget> createState() =>
+      _DashboardCustomerReviewWidgetState();
+}
+
+class _DashboardCustomerReviewWidgetState
+    extends State<DashboardCustomerReviewWidget> {
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
         ResponsiveRowColumn(
           layout: ResponsiveRowColumnType.ROW,
           rowMainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            ResponsiveRowColumnItem(
+            const ResponsiveRowColumnItem(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -40,12 +55,13 @@ class DashboardCustomerReviewWidget extends StatelessWidget {
               ),
             ),
             ResponsiveRowColumnItem(
-              child: DashboardCustomerToggleButton(),
+              child:
+                  DashboardCustomerToggleButton(controller: _scrollController),
             ),
           ],
         ),
-        SizedBox(height: 20),
-        DashboardCustomerReviewListWidget(),
+        const SizedBox(height: 20),
+        DashboardCustomerReviewListWidget(controller: _scrollController),
       ],
     );
   }

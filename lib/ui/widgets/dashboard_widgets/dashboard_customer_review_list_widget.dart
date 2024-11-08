@@ -3,13 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dashboard/ui/widgets/customer_review_card.dart';
 
 class DashboardCustomerReviewListWidget extends StatelessWidget {
-  const DashboardCustomerReviewListWidget({super.key});
+  const DashboardCustomerReviewListWidget(
+      {super.key, required this.controller});
+
+  final ScrollController controller;
 
   @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(
+    return SingleChildScrollView(
+      controller: controller,
       scrollDirection: Axis.horizontal,
-      child: Row(
+      child: const Row(
         children: [
           CustomReviewCard(
             usernameDpPath:

@@ -11,16 +11,16 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDesktop = ResponsiveBreakpoints.of(context).largerThan(MOBILE);
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+        padding: EdgeInsets.only(
+            top: 20, left: isDesktop ? 20 : 10, right: isDesktop ? 20 : 10),
         child: ScrollConfiguration(
           behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
           child: SingleChildScrollView(
             child: ResponsiveRowColumn(
-              layout: ResponsiveBreakpoints.of(context).largerThan(MOBILE)
-                  ? ResponsiveRowColumnType.COLUMN
-                  : ResponsiveRowColumnType.COLUMN,
+              layout: ResponsiveRowColumnType.COLUMN,
               children: [
                 const ResponsiveRowColumnItem(child: DashboardHeaderWidget()),
                 _buildResponsiveSizedBox(context),
