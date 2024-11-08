@@ -8,50 +8,61 @@ class DashboardCustomerToggleButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
+    final isDesktop = ResponsiveBreakpoints.of(context).isDesktop;
+    return ResponsiveRowColumn(
+      layout: isDesktop
+          ? ResponsiveRowColumnType.ROW
+          : ResponsiveRowColumnType.COLUMN,
+      rowMainAxisAlignment: MainAxisAlignment.end,
       children: [
-        GestureDetector(
-          onTap: () => controller.animateTo(
-            controller.position.minScrollExtent,
-            duration: const Duration(milliseconds: 500),
-            curve: Curves.easeInOut,
-          ),
-          child: Card(
-            color: Colors.white,
-            child: Container(
-              height: 40,
-              width: 40,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(14),
-              ),
-              child: const Icon(
-                Icons.arrow_back_ios,
-                color: Color(0xFF00B074),
+        ResponsiveRowColumnItem(
+          child: GestureDetector(
+            onTap: () => controller.animateTo(
+              controller.position.minScrollExtent,
+              duration: const Duration(milliseconds: 500),
+              curve: Curves.easeInOut,
+            ),
+            child: Card(
+              color: Colors.white,
+              child: Container(
+                height: isDesktop ? 50 : 40,
+                width: isDesktop ? 50 : 40,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: const Icon(
+                  Icons.arrow_back_ios,
+                  color: Color(0xFF00B074),
+                ),
               ),
             ),
           ),
         ),
-        SizedBox(
-          width: ResponsiveBreakpoints.of(context).largerThan(TABLET) ? 10 : 0,
-        ),
-        GestureDetector(
-          onTap: () => controller.animateTo(
-            controller.position.maxScrollExtent,
-            duration: const Duration(milliseconds: 500),
-            curve: Curves.easeInOut,
+        ResponsiveRowColumnItem(
+          child: SizedBox(
+            width:
+                ResponsiveBreakpoints.of(context).largerThan(TABLET) ? 10 : 0,
           ),
-          child: Card(
-            color: Colors.white,
-            child: Container(
-              height: 40,
-              width: 40,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(14),
-              ),
-              child: const Icon(
-                Icons.arrow_forward_ios,
-                color: Color(0xFF00B074),
+        ),
+        ResponsiveRowColumnItem(
+          child: GestureDetector(
+            onTap: () => controller.animateTo(
+              controller.position.maxScrollExtent,
+              duration: const Duration(milliseconds: 500),
+              curve: Curves.easeInOut,
+            ),
+            child: Card(
+              color: Colors.white,
+              child: Container(
+                height: isDesktop ? 50 : 40,
+                width: isDesktop ? 50 : 40,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: const Icon(
+                  Icons.arrow_forward_ios,
+                  color: Color(0xFF00B074),
+                ),
               ),
             ),
           ),

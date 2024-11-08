@@ -15,7 +15,7 @@ class DashboardScreen extends StatelessWidget {
     return Scaffold(
       body: Container(
         padding: EdgeInsets.only(
-            top: 20, left: isDesktop ? 20 : 10, right: isDesktop ? 20 : 10),
+            top: 20, left: isDesktop ? 20 : 6, right: isDesktop ? 20 : 6),
         child: ScrollConfiguration(
           behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
           child: SingleChildScrollView(

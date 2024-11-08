@@ -7,6 +7,7 @@ class DashboardHeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDesktop = ResponsiveBreakpoints.of(context).isDesktop;
     return ResponsiveRowColumn(
       layout: ResponsiveBreakpoints.of(context).largerThan(TABLET)
           ? ResponsiveRowColumnType.ROW
@@ -16,7 +17,6 @@ class DashboardHeaderWidget extends StatelessWidget {
       children: [
         const ResponsiveRowColumnItem(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
@@ -63,12 +63,12 @@ class DashboardHeaderWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
             ),
             color: Colors.white,
-            child: const Padding(
-              padding: EdgeInsets.all(16.0),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  TopbarIcon(
+                  const TopbarIcon(
                     bgColor: Color(0x262D9CDB),
                     icon: Icon(
                       Icons.calendar_month_outlined,
@@ -78,8 +78,8 @@ class DashboardHeaderWidget extends StatelessWidget {
                     countColor: Colors.black,
                     isCounterRequred: false,
                   ),
-                  SizedBox(width: 16),
-                  Column(
+                  const SizedBox(width: 16),
+                  const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
@@ -103,8 +103,9 @@ class DashboardHeaderWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(width: 8),
-                  Icon(
+                  SizedBox(width: isDesktop ? 8 : 0),
+                  if (!isDesktop) const Spacer(),
+                  const Icon(
                     Icons.keyboard_arrow_down_outlined,
                     color: Color(0xFFB9BBBD),
                     size: 32,
