@@ -19,12 +19,12 @@ class _LandingScreenState extends State<LandingScreen> {
     final isDesktop = ResponsiveBreakpoints.of(context).isDesktop;
     return Scaffold(
       key: _scaffoldKey,
-      drawer: !isDesktop ? const SidebarWidget() : null,
+      drawer: !isDesktop ? SidebarWidget() : null,
       body: Row(
         children: [
           Visibility(
             visible: isDesktop,
-            child: const SidebarWidget(),
+            child: SidebarWidget(),
           ),
           Expanded(
             child: Padding(

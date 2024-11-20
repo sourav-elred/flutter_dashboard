@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dashboard/ui/widgets/customer_map_chart_widget.dart';
-import 'package:flutter_dashboard/ui/widgets/monthly_sales_chart_widget.dart';
+import 'package:flutter_dashboard/ui/widgets/monthly_sales_chart_widget/monthly_sales_chart_widget.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class DashboardMonthlySalesChartWidget extends StatelessWidget {
