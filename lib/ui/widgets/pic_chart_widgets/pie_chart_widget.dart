@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dashboard/ui/widgets/pic_chart_header_widget.dart';
-import 'package:flutter_dashboard/ui/widgets/pic_chart_main_widget.dart';
+import 'package:flutter_dashboard/ui/widgets/pic_chart_widgets/pic_chart_header_widget.dart';
+import 'package:flutter_dashboard/ui/widgets/pic_chart_widgets/pic_chart_main_widget.dart';
 
 class PieChartWidget extends StatefulWidget {
   const PieChartWidget({super.key});

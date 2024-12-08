@@ -2,9 +2,9 @@ import 'dart:math';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dashboard/ui/widgets/customer_map_chart_Title_widget.dart';
-import 'package:flutter_dashboard/ui/widgets/customer_map_chart_heading_widget.dart';
-import 'package:flutter_dashboard/ui/widgets/customer_map_chart_left_title_widget.dart';
+import 'package:flutter_dashboard/ui/widgets/customer_map_chart_widgets/customer_map_chart_Title_widget.dart';
+import 'package:flutter_dashboard/ui/widgets/customer_map_chart_widgets/customer_map_chart_heading_widget.dart';
+import 'package:flutter_dashboard/ui/widgets/customer_map_chart_widgets/customer_map_chart_left_title_widget.dart';
 
 class CustomerMapChartWidget extends StatelessWidget {
   const CustomerMapChartWidget({super.key});

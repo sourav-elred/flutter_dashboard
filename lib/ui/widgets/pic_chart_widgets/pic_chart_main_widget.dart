@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dashboard/ui/widgets/pic_chart_with_title.dart';
+import 'package:flutter_dashboard/ui/widgets/pic_chart_widgets/pic_chart_with_title.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class PieChartMainWidget extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dashboard/ui/widgets/customer_review_card_username_widget.dart';
+import 'package:flutter_dashboard/ui/widgets/customer_map_chart_widgets/customer_review_card_username_widget.dart';
 
 class CustomReviewCard extends StatelessWidget {
   const CustomReviewCard({

@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dashboard/ui/dashboard_screen.dart';
 import 'package:flutter_dashboard/ui/landing_screen.dart';
+import 'package:flutter_dashboard/utlis/route_const.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRouter {
@@ -15,121 +16,75 @@ class AppRouter {
         },
         routes: [
           GoRoute(
-            path: '/dashboard',
+            path: RouteConst.dashboard,
             builder: (context, state) => const DashboardScreen(),
           ),
           GoRoute(
-            path: '/order-list',
-            builder: (context, state) => const Scaffold(
-              body: Center(
-                  child: Text(
-                'order list',
-                style: TextStyle(color: Colors.black),
-              )),
-            ),
+            path: RouteConst.orderList,
+            builder: (context, state) => const EmptyWidget(label: 'order list'),
           ),
           GoRoute(
-            path: '/order-details',
-            builder: (context, state) => const Scaffold(
-              body: Center(
-                  child: Text(
-                'order-details',
-                style: TextStyle(color: Colors.black),
-              )),
-            ),
+            path: RouteConst.orderDetails,
+            builder: (context, state) =>
+                const EmptyWidget(label: 'order-details'),
           ),
           GoRoute(
-            path: '/customer',
-            builder: (context, state) => const Scaffold(
-              body: Center(
-                  child: Text(
-                'customer',
-                style: TextStyle(color: Colors.black),
-              )),
-            ),
+            path: RouteConst.customer,
+            builder: (context, state) => const EmptyWidget(label: 'customer'),
           ),
           GoRoute(
-            path: '/analytics',
-            builder: (context, state) => const Scaffold(
-              body: Center(
-                  child: Text(
-                'analytics',
-                style: TextStyle(color: Colors.black),
-              )),
-            ),
+            path: RouteConst.analytics,
+            builder: (context, state) => const EmptyWidget(label: 'analytics'),
           ),
           GoRoute(
-            path: '/reviews',
-            builder: (context, state) => const Scaffold(
-              body: Center(
-                  child: Text(
-                'reviews',
-                style: TextStyle(color: Colors.black),
-              )),
-            ),
+            path: RouteConst.reviews,
+            builder: (context, state) => const EmptyWidget(label: 'reviews'),
           ),
           GoRoute(
-            path: '/foods',
-            builder: (context, state) => const Scaffold(
-              body: Center(
-                  child: Text(
-                'foods',
-                style: TextStyle(color: Colors.black),
-              )),
-            ),
+            path: RouteConst.foods,
+            builder: (context, state) => const EmptyWidget(label: 'foods'),
           ),
           GoRoute(
-            path: '/food-details',
-            builder: (context, state) => const Scaffold(
-              body: Center(
-                  child: Text(
-                'food-details',
-                style: TextStyle(color: Colors.black),
-              )),
-            ),
+            path: RouteConst.foodDetails,
+            builder: (context, state) =>
+                const EmptyWidget(label: 'food-details'),
           ),
           GoRoute(
-            path: '/customer-details',
-            builder: (context, state) => const Scaffold(
-              body: Center(
-                  child: Text(
-                'customer-details',
-                style: TextStyle(color: Colors.black),
-              )),
-            ),
+            path: RouteConst.customerDetails,
+            builder: (context, state) =>
+                const EmptyWidget(label: 'customer-details'),
           ),
           GoRoute(
-            path: '/calender',
-            builder: (context, state) => const Scaffold(
-              body: Center(
-                  child: Text(
-                'calender',
-                style: TextStyle(color: Colors.black),
-              )),
-            ),
+            path: RouteConst.calender,
+            builder: (context, state) => const EmptyWidget(label: 'calender'),
           ),
           GoRoute(
-            path: '/chat',
-            builder: (context, state) => const Scaffold(
-              body: Center(
-                  child: Text(
-                'chat',
-                style: TextStyle(color: Colors.black),
-              )),
-            ),
+            path: RouteConst.chat,
+            builder: (context, state) => const EmptyWidget(label: 'chat'),
           ),
           GoRoute(
-            path: '/wallet',
-            builder: (context, state) => const Scaffold(
-              body: Center(
-                  child: Text(
-                'wallet',
-                style: TextStyle(color: Colors.black),
-              )),
-            ),
+            path: RouteConst.wallet,
+            builder: (context, state) => const EmptyWidget(label: 'wallet'),
           ),
         ],
       ),
     ],
   );
+}
+
+class EmptyWidget extends StatelessWidget {
+  const EmptyWidget({super.key, required this.label});
+
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+          child: Text(
+        label,
+        style: const TextStyle(color: Colors.black),
+      )),
+    );
+  }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dashboard/ui/widgets/topbar_icons_section_widget.dart';
-import 'package:flutter_dashboard/ui/widgets/topbar_searchbar_widget.dart';
+import 'package:flutter_dashboard/ui/widgets/topbar_widgets/topbar_icons_section_widget.dart';
+import 'package:flutter_dashboard/ui/widgets/topbar_widgets/topbar_searchbar_widget.dart';
 import 'package:flutter_dashboard/ui/widgets/username_widget.dart';
 
 class TopbarWidget extends StatelessWidget {

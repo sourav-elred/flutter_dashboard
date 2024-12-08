@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dashboard/ui/widgets/sidebar_widget.dart';
-import 'package:flutter_dashboard/ui/widgets/topbar_widget.dart';
+import 'package:flutter_dashboard/ui/widgets/topbar_widgets/topbar_widget.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class LandingScreen extends StatefulWidget {

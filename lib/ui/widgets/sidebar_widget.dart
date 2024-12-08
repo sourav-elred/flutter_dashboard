@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dashboard/ui/widgets/sidebar_button.dart';
 import 'package:flutter_dashboard/utlis/sidebar_widget_mixing.dart';
+import 'package:flutter_dashboard/utlis/string_ext.dart';
 
 class SidebarWidget extends StatelessWidget with SidebarMixing {
   SidebarWidget({super.key});
@@ -29,8 +30,8 @@ class SidebarWidget extends StatelessWidget with SidebarMixing {
                   return SidebarButton(
                     onTap: () => sidebarNavigation(index, context),
                     isSelected: index == getSelectedIndex(context),
-                    icon: sideMenuItems[index]['icon'] as IconData,
-                    title: sideMenuItems[index]['title'] as String,
+                    icon: sideMenuItems[index].icon,
+                    title: sideMenuItems[index].route.toTitleCase(),
                   );
                 },
               ),

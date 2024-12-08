@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dashboard/ui/widgets/topbar_icon.dart';
+import 'package:flutter_dashboard/ui/widgets/topbar_widgets/topbar_icon.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class DashboardHeaderWidget extends StatelessWidget {

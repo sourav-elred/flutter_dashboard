@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dashboard/ui/widgets/chart_order_widget.dart';
-import 'package:flutter_dashboard/ui/widgets/pie_chart_widget.dart';
+import 'package:flutter_dashboard/ui/widgets/chart_order_widgets/chart_order_widget.dart';
+import 'package:flutter_dashboard/ui/widgets/pic_chart_widgets/pie_chart_widget.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class DashboardChartWidget extends StatelessWidget {
